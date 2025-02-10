@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <title>Document</title>
+    <style>
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .text {
+        margin: 0;
+        padding: 0;
+      }
+
+      .card {
+        margin-top: 20px;
+        position: relative;
+        padding: 20px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .brand {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inputs">
+      <h3>Card config:</h3>
+      <div>
+        <label for="width"> Width </label>
+        <input type="text" placeholder="width" id="width" />
+      </div>
+      <div>
+        <label for="height"> Height </label>
+        <input type="text" placeholder="height" id="height" />
+      </div>
+      <div>
+        <label for="backgroundColor"> Background Color </label>
+        <input type="text" placeholder="backgroundColor" id="backgroundColor" />
+      </div>
+      <div>
+        <label for="textColor"> Text Color </label>
+        <input type="text" placeholder="textColor" id="textColor" />
+      </div>
+      <div>
+        <label for="fontSize"> Font Size </label>
+        <input type="text" placeholder="fontSize" id="fontSize" />
+      </div>
+      <div>
+        <label for="padding"> Padding </label>
+        <input type="text" placeholder="padding" id="padding" />
+      </div>
+      <div>
+        <label for="text"> Text Align </label>
+        <input type="text" placeholder="textAlign" id="textAlign" />
+      </div>
+      <div>
+        <label for="text"> Text </label>
+        <input type="text" placeholder="text" id="text" />
+      </div>
+      <div>
+        <label for="font">Font</label>
+        <input type="text" placeholder="font" id="font" />
+      </div>
+      <h3>Brand config:</h3>
+      <div>
+        <label for="brandColor"> Text Color </label>
+        <input type="text" placeholder="brandTextColor" id="brandTextColor" />
+      </div>
+      <div>
+        <label for="brandFontSize"> Font Size </label>
+        <input type="text" placeholder="brandFontSize" id="brandFontSize" />
+      </div>
+      <div>
+        <label for="brandBottom"> Bottom </label>
+        <input type="text" placeholder="brandBottom" id="brandBottom" />
+      </div>
+      <div>
+        <label for="brandTextAlign"> Text Align </label>
+        <input type="text" placeholder="brandTextAlign" id="brandTextAlign" />
+      </div>
+      <div>
+        <label for="brandFont"> Brand Font </label>
+        <input type="text" placeholder="brandFont" id="brandFont" />
+      </div>
+    </div>
+    <h3>Downlaod</h3>
+    <button id="downloadBtn">Download as Image</button>
+    <div class="card" id="card">
+      <p class="text" id="textCard"></p>
+      <p class="brand" id="brandTextCard">@hablemos_de_tetas</p>
+    </div>
+  </body>
+  <script>
+    const initialValues = {
+      width: 500,
+      height: 500,
+      backgroundColor: "black",
+      textColor: "white",
+      fontSize: 40,
+      padding: 20,
+      textAlign: "center",
+      text: "Hello world",
+      font: "Arial",
+      brandTextColor: "white",
+      brandFontSize: 20,
+      brandBottom: 20,
+      brandTextAlign: "center",
+      brandFont: "Arial",
+    };
+
+    const width = document.getElementById("width");
+    const height = document.getElementById("height");
+    const backgroundColor = document.getElementById("backgroundColor");
+    const textColor = document.getElementById("textColor");
+    const fontSize = document.getElementById("fontSize");
+    const padding = document.getElementById("padding");
+    const textAlign = document.getElementById("textAlign");
+    const text = document.getElementById("text");
+    const font = document.getElementById("font");
+
+    const brandTextColor = document.getElementById("brandTextColor");
+    const brandFontSize = document.getElementById("brandFontSize");
+    const brandBottom = document.getElementById("brandBottom");
+    const brandTextAlign = document.getElementById("brandTextAlign");
+    const brandFont = document.getElementById("brandFont");
+
+    const card = document.getElementById("card");
+    const textCard = document.getElementById("textCard");
+    const brandTextCard = document.getElementById("brandTextCard");
+
+    function loadGoogleFont(fontName) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `https://fonts.googleapis.com/css2?family=${fontName.replace(
+        / /g,
+        "+"
+      )}&display=swap`;
+      document.head.appendChild(link);
+    }
+
+    card.style.width = initialValues.width + "px";
+    card.style.height = initialValues.height + "px";
+    card.style.backgroundColor = initialValues.backgroundColor;
+    textCard.style.color = initialValues.textColor;
+    textCard.style.fontSize = initialValues.fontSize + "px";
+    card.style.padding = initialValues.padding + "px";
+    textCard.style.textAlign = initialValues.textAlign;
+    textCard.textContent = initialValues.text;
+    textCard.style.fontFamily = initialValues.font;
+    brandTextCard.style.color = initialValues.brandTextColor;
+    brandTextCard.style.fontSize = initialValues.brandFontSize + "px";
+    brandTextCard.style.bottom = initialValues.brandBottom + "px";
+    brandTextCard.style.textAlign = initialValues.brandTextAlign;
+    brandTextCard.style.fontFamily = initialValues.brandFont;
+
+    width.addEventListener("input", () => {
+      card.style.width = width.value + "px";
+    });
+    height.addEventListener("input", () => {
+      card.style.height = height.value + "px";
+    });
+    backgroundColor.addEventListener("input", () => {
+      card.style.backgroundColor = backgroundColor.value;
+    });
+    textColor.addEventListener("input", () => {
+      textCard.style.color = textColor.value;
+    });
+    fontSize.addEventListener("input", () => {
+      textCard.style.fontSize = fontSize.value + "px";
+    });
+    padding.addEventListener("input", () => {
+      card.style.padding = padding.value + "px";
+    });
+    textAlign.addEventListener("input", () => {
+      textCard.style.textAlign = textAlign.value;
+    });
+    text.addEventListener("input", () => {
+      textCard.textContent = text.value;
+    });
+    font.addEventListener("input", () => {
+      loadGoogleFont(font.value);
+      textCard.style.fontFamily = font.value;
+    });
+
+    brandTextColor.addEventListener("input", () => {
+      brandTextCard.style.color = brandTextColor.value;
+    });
+    brandFontSize.addEventListener("input", () => {
+      brandTextCard.style.fontSize = brandFontSize.value + "px";
+    });
+    brandBottom.addEventListener("input", () => {
+      brandTextCard.style.bottom = brandBottom.value + "px";
+    });
+    brandTextAlign.addEventListener("input", () => {
+      brandTextCard.style.textAlign = brandTextAlign.value;
+    });
+    brandFont.addEventListener("input", () => {
+      loadGoogleFont(brandFont.value);
+      brandTextCard.style.fontFamily = brandFont.value;
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      html2canvas(card).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "card.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+      });
+    });
+  </script>
+</html>
